@@ -33,8 +33,32 @@ const getData = catchAsync(async (req, res) => {
     })
 });
 
+const updateData = catchAsync(async (req, res) => {
+    const id = parseInt(req.params.id);
+    const { ...updatedData } = req.body;
+
+    const result = await DataService.updateData(id, updatedData);
+
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        data: result
+    })
+});
+const deleteData = catchAsync(async (req, res) => {
+    const id = parseInt(req.params.id);
+    const result = await DataService.deleteData(id);
+
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        data: result
+    })
+});
 export const DataController = {
     getAllData,
     createData,
-    getData
+    getData,
+    updateData,
+    deleteData
 }

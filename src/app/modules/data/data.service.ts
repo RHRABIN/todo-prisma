@@ -19,9 +19,25 @@ const getData = async (id: number): Promise<Data | null> => {
     })
     return result;
 };
+const updateData = async (id: number, payload: Data): Promise<Data | null> => {
+    const result = await prisma.data.update({
+        where: { id }, data: payload,
+    })
+    return result;
+};
+const deleteData = async (id: number): Promise<Data | null> => {
+    const result = await prisma.data.delete({
+        where: {
+            id
+        }
+    })
+    return result;
+};
 
 export const DataService = {
     getAllData,
     createData,
-    getData
+    getData,
+    updateData,
+    deleteData
 }
